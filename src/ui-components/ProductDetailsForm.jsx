@@ -6,38 +6,10 @@
 
 /* eslint-disable */
 import React from "react";
-import {
-  getOverrideProps,
-  useDataStoreCreateAction,
-  useStateMutationAction,
-} from "@aws-amplify/ui-react/internal";
-import { ProductDetails } from "../models";
-import { schema } from "../models/schema";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Button, TextField, View } from "@aws-amplify/ui-react";
 export default function ProductDetailsForm(props) {
   const { overrides, ...rest } = props;
-  const [
-    textFieldThreeFourFourSixTwoSixNineZeroValue,
-    setTextFieldThreeFourFourSixTwoSixNineZeroValue,
-  ] = useStateMutationAction("");
-  const [
-    textFieldThreeFourFourSixTwoSixNineSevenValue,
-    setTextFieldThreeFourFourSixTwoSixNineSevenValue,
-  ] = useStateMutationAction("");
-  const [
-    textFieldThreeFourFourSixTwoSevenZeroFourValue,
-    setTextFieldThreeFourFourSixTwoSevenZeroFourValue,
-  ] = useStateMutationAction("");
-  const buttonOnClick = useDataStoreCreateAction({
-    fields: {
-      SKU: textFieldThreeFourFourSixTwoSixNineZeroValue,
-      Collectio: textFieldThreeFourFourSixTwoSixNineSevenValue,
-      Type: textFieldThreeFourFourSixTwoSevenZeroFourValue,
-      Collection: textFieldThreeFourFourSixTwoSixNineSevenValue,
-    },
-    model: ProductDetails,
-    schema: schema,
-  });
   return (
     <View
       width="300px"
@@ -65,10 +37,6 @@ export default function ProductDetailsForm(props) {
         isDisabled={false}
         labelHidden={false}
         variation="default"
-        value={textFieldThreeFourFourSixTwoSixNineZeroValue}
-        onChange={(event) => {
-          setTextFieldThreeFourFourSixTwoSixNineZeroValue(event.target.value);
-        }}
         {...getOverrideProps(overrides, "TextField34462690")}
       ></TextField>
       <TextField
@@ -87,10 +55,6 @@ export default function ProductDetailsForm(props) {
         isDisabled={false}
         labelHidden={false}
         variation="default"
-        value={textFieldThreeFourFourSixTwoSixNineSevenValue}
-        onChange={(event) => {
-          setTextFieldThreeFourFourSixTwoSixNineSevenValue(event.target.value);
-        }}
         {...getOverrideProps(overrides, "TextField34462697")}
       ></TextField>
       <TextField
@@ -109,10 +73,6 @@ export default function ProductDetailsForm(props) {
         isDisabled={false}
         labelHidden={false}
         variation="default"
-        value={textFieldThreeFourFourSixTwoSevenZeroFourValue}
-        onChange={(event) => {
-          setTextFieldThreeFourFourSixTwoSevenZeroFourValue(event.target.value);
-        }}
         {...getOverrideProps(overrides, "TextField34462704")}
       ></TextField>
       <Button
@@ -130,9 +90,6 @@ export default function ProductDetailsForm(props) {
         isDisabled={false}
         variation="default"
         children="Create Product"
-        onClick={() => {
-          buttonOnClick();
-        }}
         {...getOverrideProps(overrides, "Button")}
       ></Button>
     </View>

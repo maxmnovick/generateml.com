@@ -24,3 +24,11 @@ a {
     background: black;
   }
 }
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}
