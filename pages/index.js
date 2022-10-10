@@ -32,6 +32,7 @@ export default function Home() {
         }
       };
       const handle = await API.get('productgeneratorapi','/product', myInit);
+      //const handle = 'handle'
       console.log({ handle });
 
       await DataStore.save(
