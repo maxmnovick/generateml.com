@@ -15,11 +15,11 @@
       "function": {
         "generateproduct": {
           "deploymentBucketName": "amplify-generatemlcom-staging-155334-deployment",
-          "s3Key": "amplify-builds/generateproduct-374b6330546661515578-build.zip"
+          "s3Key": "amplify-builds/generateproduct-5670333368526f6a5145-build.zip"
         },
         "generatemlcom6b99fc4b": {
           "deploymentBucketName": "amplify-generatemlcom-staging-155334-deployment",
-          "s3Key": "amplify-builds/generatemlcom6b99fc4b-6e774954694330502b44-build.zip"
+          "s3Key": "amplify-builds/generatemlcom6b99fc4b-37704650694636686236-build.zip"
         }
       }
     }

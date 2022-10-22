@@ -13,7 +13,7 @@ export default function CatalogRow(props) {
   return (
     <View
       width="600px"
-      height="49px"
+      height="50px"
       overflow="hidden"
       position="relative"
       padding="0px 0px 0px 0px"
@@ -54,7 +54,7 @@ export default function CatalogRow(props) {
         width="200px"
         height="50px"
         position="absolute"
-        top="-1px"
+        top="0px"
         left="200px"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
