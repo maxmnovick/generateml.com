@@ -106,6 +106,7 @@ def generate_handle(item_details):
 
 		# keywords in form without dashes so remove excess from descrip to compare to keywords
 		plain_descrip = descrip.lower().strip()
+		#print("plain_descrip: " + plain_descrip)
 		plain_features = features.lower().strip()
 
 		for title_suffix, title_keywords in all_keywords.items():

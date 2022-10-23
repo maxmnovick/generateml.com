@@ -11,20 +11,20 @@ def determine_standard_key(raw_key):
     print("\n===Determine Standard Key for " + raw_key + "===\n")
 
     standard_key = ''
-
+    print('change not taking effect')
     all_field_keywords = { 
         'sku':['sku','item#'], 
         'collection':['collection'],
         'features':['features','acme.description'],
-        'type':['product type','description'],
         'intro':['intro','short description'],
+        'type':['product type','acme.name','description'],
         'color':['color'],
         'material':['material'],
         'finish':['finish'],
         'width':['width'],
         'depth':['depth','length'],
         'height':['height'],
-        'weight':['weight'],
+        'weight':['product weight'],
         'cost':['cost','price'],
         'images':['image'],
         'barcode':['barcode']

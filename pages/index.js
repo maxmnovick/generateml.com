@@ -178,7 +178,7 @@ export default function Home() {
             data = data.replace(/</g,"&lt;").replace(/>/g,"&gt;")
             console.log("data after replacement: ", data);
           }
-          text += "<td>" + data + "</td>";
+          text += "<td><div>" + data + "</div></td>";
         }
         text += "</tr>";
         
