@@ -11,6 +11,7 @@ import converter # convert all weights to grams
 import generator # generate output
 import sorter # sort items by size
 import writer # format output
+import determiner # determine std key
 
 #logging.basicConfig(level=logging.DEBUG)
 # logger = logging.getLogger()
@@ -152,8 +153,8 @@ def convert_list_of_items_to_fields(all_items_json):
 			# all_skus.append(item_json['sku'])
 			# all_collections.append(item_json['collection'])
 			for key in item_json:
-				standard_key = determine_standard_key(key)
-				formatted_input = format_vendor_product_data(item_json[key], standard_key) # passing in a single value corresponding to key. also need key to determine format.
+				standard_key = determiner.determine_standard_key(key)
+				formatted_input = reader.format_vendor_product_data(item_json[key], standard_key) # passing in a single value corresponding to key. also need key to determine format.
 				if standard_key != '' and formatted_input != '':
 					if key in all_fields_dict.keys():
 						print("add to existing key")
@@ -467,6 +468,8 @@ def display_shopify_variants(seller, vendor, all_details, product_titles, all_co
 
 # adapted from product generator
 def generate_all_products(all_items_json):
+	print("\n===Generate All Products===\n")
+
 	seller = 'HFF'
 	vendor = 'acme'
 
