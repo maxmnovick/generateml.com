@@ -331,13 +331,18 @@ def generate_product_img_src(item_details):
 
 	img_src = item_details[img_src_idx]
 
-	if re.search('drive.google.com',img_src):
+	if img_src == 'n/a':
+		img_src = ''
+
+	elif re.search('drive.google.com',img_src):
 		# extract ID
 		img_id = re.sub("https://drive.google.com/file/d/|/view\?usp=sharing","",img_src)
 		#img_id = re.sub("/view\?usp=sharing","",img_id)
 		print("img_id: " + img_id)
 
 		img_src = "https://drive.google.com/uc?export=view&id=" + img_id
+	
+	
 
 	return img_src
 
@@ -1372,10 +1377,13 @@ def generate_materials_fmla(product):
 
 def generate_materials_html(product):
 
-	final_materials_html = "<tr>" # init fmla for this part of the description
+	final_materials_html = "" # init fmla for this part of the description
 	if determine_given_materials(product): # if we are NOT given materials we do not include materials in the description
 		#print("\n===GIVEN MATERIALS===\n")
-		final_materials_html = "<tr><td>Materials: </td>" # only if at least 1 of the variants has materials
+		if not determine_given_colors(product):
+			final_materials_html = "<table>"
+
+		final_materials_html += "<tr><td>Materials: </td>" # only if at least 1 of the variants has materials
 		#print("final_materials_html: " + final_materials_html)
 		# for now, only handle cases where all variants have same material
 		variant1 = product[0]
@@ -1445,7 +1453,9 @@ def generate_finishes_html(product):
 	final_finishes_html = "" # init fmla for this part of the description
 	if determine_given_finishes(product): # if we are NOT given finishes we do not include finishes in the description
 		print("Given Finishes!")
-		final_finishes_html = "<tr><td>Finishes: </td>" # only if at least 1 of the variants has finishes
+		if not determine_given_colors(product) and not determine_given_materials(product):
+			final_finishes_html = "<table>"
+		final_finishes_html += "<tr><td>Finishes: </td>" # only if at least 1 of the variants has finishes
 
 		# for now, only handle cases where all variants have same material
 		variant1 = product[0]

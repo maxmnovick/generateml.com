@@ -74,3 +74,57 @@ tr:not(:last-child) {
 tr:last-child {
   border-bottom: 1px solid black;
 }
+
+.step_wrapper {
+  margin-bottom: 18px;
+}
+
+.body_wrapper {
+  margin:6px 12px;
+}
+
+.option_value {
+  border:1px solid black;
+}
+
+.compare_price {
+  text-decoration: line-through;
+  display: inline;
+}
+
+.details_wrapper {
+  max-width: 530px;
+}
+
+.title {
+  font-size: 32px;
+}
+
+.form_wrapper {
+  margin-bottom: 12px;
+}
+
+.form_table {
+  margin-bottom: 12px;
+  max-width: 500px;
+  text-align: left;
+}
+
+.submit_btn_wrapper {
+  position: relative;
+}
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.center_horizontal {
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  -ms-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+}

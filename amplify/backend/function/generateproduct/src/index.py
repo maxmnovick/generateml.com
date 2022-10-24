@@ -77,64 +77,64 @@ def convert_all_final_item_info_to_json(all_info):
 
 	return all_json
 
-def determine_standard_key(raw_key):
-    print("\n===Determine Standard Key for " + raw_key + "===\n")
+# def determine_standard_key(raw_key):
+#     print("\n===Determine Standard Key for " + raw_key + "===\n")
 
-    standard_key = ''
+#     standard_key = ''
 
-    all_field_keywords = { 
-        'sku':['sku','item#'], 
-        'collection':['collection'],
-        'features':['features','acme.description'],
-        'type':['product type','description'],
-        'intro':['intro','short description'],
-        'color':['color'],
-        'material':['material'],
-        'finish':['finish'],
-        'width':['width'],
-        'depth':['depth','length'],
-        'height':['height'],
-        'weight':['weight'],
-        'cost':['cost','price'],
-        'images':['image'],
-        'barcode':['barcode']
-    }
+#     all_field_keywords = { 
+#         'sku':['sku','item#'], 
+#         'collection':['collection'],
+#         'features':['features','acme.description'],
+#         'type':['product type','description'],
+#         'intro':['intro','short description'],
+#         'color':['color'],
+#         'material':['material'],
+#         'finish':['finish'],
+#         'width':['width'],
+#         'depth':['depth','length'],
+#         'height':['height'],
+#         'weight':['weight'],
+#         'cost':['cost','price'],
+#         'images':['image'],
+#         'barcode':['barcode']
+#     }
 
-    for field_key, field_keywords in all_field_keywords.items():
-        print("field_key, field_keywords: " + field_key + ", " + str(field_keywords))
-        for keyword in field_keywords:
-            raw_key_no_space = re.sub('(\\s+|_)','',raw_key.lower()) # unpredictable typos OR format in headers given by vendor such as 'D E S C R I P T I O N'
-            keyword_no_space = re.sub('\\s', '', keyword)
-            if re.search(keyword_no_space, raw_key_no_space):
-                print("keyword " + keyword + " in raw_key " + raw_key)
-                standard_key = field_key
-                break
-        if standard_key != '':
-            break
+#     for field_key, field_keywords in all_field_keywords.items():
+#         print("field_key, field_keywords: " + field_key + ", " + str(field_keywords))
+#         for keyword in field_keywords:
+#             raw_key_no_space = re.sub('(\\s+|_)','',raw_key.lower()) # unpredictable typos OR format in headers given by vendor such as 'D E S C R I P T I O N'
+#             keyword_no_space = re.sub('\\s', '', keyword)
+#             if re.search(keyword_no_space, raw_key_no_space):
+#                 print("keyword " + keyword + " in raw_key " + raw_key)
+#                 standard_key = field_key
+#                 break
+#         if standard_key != '':
+#             break
 
-    print("standard_key: " + standard_key)
-    return standard_key
+#     print("standard_key: " + standard_key)
+#     return standard_key
 
-def format_vendor_product_data(raw_data, key):
-	print("\n===Format Vendor Product Data===\n")
-	print("raw_data: " + str(raw_data))
+# def format_vendor_product_data(raw_data, key):
+# 	print("\n===Format Vendor Product Data===\n")
+# 	print("raw_data: " + str(raw_data))
 
-	data = str(raw_data) # should it be blank init so we can check it has been set easily?
+# 	data = str(raw_data) # should it be blank init so we can check it has been set easily?
 
-	text_fields = ['type','features','intro','finish','material'] # plain text is interpreted specifically
-	if key == 'sku':
-		data = str(raw_data).strip().lstrip("0")
-	elif key == 'cost':
-		data = str(raw_data).replace("$","").replace(",","").strip()
-	elif key == 'images':
-		data = str(raw_data).strip().lstrip("[").rstrip("]")
-	elif key in text_fields:
-		data = str(raw_data).strip().replace(";","-")
-	else:
-		data = str(raw_data).strip()
-	print("data: " + key + " " + str(data))
+# 	text_fields = ['type','features','intro','finish','material'] # plain text is interpreted specifically
+# 	if key == 'sku':
+# 		data = str(raw_data).strip().lstrip("0")
+# 	elif key == 'cost':
+# 		data = str(raw_data).replace("$","").replace(",","").strip()
+# 	elif key == 'images':
+# 		data = str(raw_data).strip().lstrip("[").rstrip("]")
+# 	elif key in text_fields:
+# 		data = str(raw_data).strip().replace(";","-")
+# 	else:
+# 		data = str(raw_data).strip()
+# 	print("data: " + key + " " + str(data))
 
-	return data
+# 	return data
 
 # convert from all_items_json = [[{'sku':'sku1','collection':'col1'}]]
 # to [{'sku':['sku1'],'collection':['col1']}]
@@ -168,7 +168,7 @@ def convert_list_of_items_to_fields(all_items_json):
 			
 		list_of_fields.append(all_fields_dict)
 
-	print("all_fields_dict: " + str(all_fields_dict))
+	print("list_of_fields: " + str(list_of_fields))
 	return list_of_fields
 
 
@@ -545,28 +545,57 @@ def generate_all_products(all_items_json):
 
 	return all_products
 
+def generate_single_product():
+	product = {}
+	return product
+
 def handler(event, context):
-    print('received event:')
-    print(event)
-    # logger.info('event')
+	print('received event:')
+	print(event)
+	# logger.info('event')
     # logger.info(event)
+	# # queryStringParameters = { param1: x, param2: y }
+	submit_type = event.get('queryStringParameters')['submit_type']
+	final_data = json.dumps('')
+	if submit_type == 'form':
+		sku = event.get('queryStringParameters')['sku']
+		collection = event.get('queryStringParameters')['collection']
+		type = event.get('queryStringParameters')['type']
+		intro = event.get('queryStringParameters')['intro']
+		colors = event.get('queryStringParameters')['colors']
+		materials = event.get('queryStringParameters')['materials']
+		finish = event.get('queryStringParameters')['finish']
+		width = event.get('queryStringParameters')['width']
+		depth = event.get('queryStringParameters')['depth']
+		height = event.get('queryStringParameters')['height']
+		weight = event.get('queryStringParameters')['weight']
+		features = event.get('queryStringParameters')['features']
+		cost = event.get('queryStringParameters')['cost']
+		images = event.get('queryStringParameters')['images']
+		
+		all_items_json = [[{
+			"sku":sku,
+			"collection":collection,
+			"type":type,
+			"intro":intro,
+			"colors":colors,
+			"materials":materials,
+			"finish":finish,
+			"width":width,
+			"depth":depth,
+			"height":height,
+			"weight":weight,
+			"features":features,
+			"cost":cost,
+			"images":images
+		}]]
 
-
-    # queryStringParameters = { param1: x, param2: y }
-    submit_type = event.get('queryStringParameters')['submit_type']
-    final_data = json.dumps('')
-
-
-    if submit_type == 'form':
-        collection = event.get('queryStringParameters')['collection']
-        type = event.get('queryStringParameters')['type']
-        handle = collection + '-' + type
-        final_data = json.dumps(handle)  #json.dumps('Hello from your new Amplify Python lambda!')
-    
-    elif submit_type == 'file':
-        all_items_json = json.loads(event.get('queryStringParameters')['vendor_product_json'])
-        print("all_items_json: " + str(all_items_json))
-        product_import_rows = generate_all_products(all_items_json)
+		product = generate_all_products(all_items_json)[0]
+		final_data = json.dumps(product)
+	elif submit_type == 'file':
+		all_items_json = json.loads(event.get('queryStringParameters')['vendor_product_json'])
+		print("all_items_json: " + str(all_items_json))
+		product_import_rows = generate_all_products(all_items_json)
 
 
 
@@ -620,12 +649,9 @@ def handler(event, context):
         #         import_row['title'] = title
         #         import_row['variant_sku'] = variant_sku
         #         product_import_rows.append(import_row) # [{}]
-
-        final_data = json.dumps(product_import_rows) # rows, one for each product, ready for import
-            
-
-
-    return {
+		final_data = json.dumps(product_import_rows) # rows, one for each product, ready for import
+	
+	return {
         'statusCode': 200,
         'headers': {
             'Access-Control-Allow-Headers': '*',
