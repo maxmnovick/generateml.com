@@ -1,5 +1,5 @@
 import { API, autoShowTooltip, DataStore } from "aws-amplify";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ProductDetails, ProductImport } from "../src/models";
 import { CatalogHeaders, CatalogRows, ImportHeaders, ImportRows, ProductDetailsForm, ProductCard } from "../src/ui-components";
 //const {spawn} = require("child_process");
@@ -168,7 +168,7 @@ export default function Home() {
     console.log("sample_img: ", sample_img)
     var product_img = document.getElementById("product_image");
     product_img.src = sample_img;
-    product_img.style.maxWidth = '500px';
+    product_img.style.maxWidth = '400px';
     // var product_card_img = document.getElementById("product_card_image");
     // product_card_img.src = sample_img;
     // product_card_img.style.maxWidth = '300px';
